@@ -1,0 +1,209 @@
+.contact-page {
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) 0;
+    color: #F8FAFC;
+}
+
+.contact-panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+    gap: clamp(2rem, 7vw, 6rem);
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 28px;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(8, 18, 38, 0.8));
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(14px);
+}
+
+.contact-copy,
+.contact-form {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-eyebrow {
+    margin: 0 0 1rem;
+    color: #67e8f9;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.contact-copy h1 {
+    margin: 0;
+    color: #F8FAFC;
+    font-size: clamp(2.7rem, 6vw, 4.8rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 1.04;
+}
+
+.contact-copy h1 span {
+    display: block;
+    color: #67e8f9;
+}
+
+.contact-description {
+    max-width: 440px;
+    margin: 1.5rem 0 1.25rem;
+    color: #AAB7CC;
+    line-height: 1.8;
+}
+
+.contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #CFFAFE;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contact-email:hover {
+    color: #fff;
+}
+
+.contact-orbit-art {
+    position: relative;
+    display: grid;
+    width: 220px;
+    height: 190px;
+    margin: 2rem auto 0;
+    place-items: center;
+}
+
+.contact-orbit {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border: 1px solid rgba(103, 232, 249, 0.35);
+    border-radius: 50%;
+    box-shadow: 0 0 35px rgba(0, 229, 255, 0.1);
+}
+
+.contact-orbit-a {
+    transform: scaleX(0.55) rotate(45deg);
+}
+
+.contact-orbit-b {
+    transform: scaleX(0.55) rotate(-45deg);
+}
+
+.contact-orbit-core {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    place-items: center;
+    border: 1px solid rgba(103, 232, 249, 0.5);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, #164e63, #0b1225 72%);
+    color: #CFFAFE;
+    font-size: 1.7rem;
+    font-weight: 700;
+    box-shadow: 0 0 35px rgba(0, 229, 255, 0.22);
+}
+
+.contact-orbit-star {
+    position: absolute;
+    color: #a5f3fc;
+    text-shadow: 0 0 14px rgba(103, 232, 249, 0.8);
+}
+
+.contact-orbit-star-a {
+    top: 0.5rem;
+    right: 2rem;
+}
+
+.contact-orbit-star-b {
+    bottom: 1rem;
+    left: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.contact-form label {
+    margin: 1rem 0 0.5rem;
+    color: #E2E8F0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    background: rgba(2, 6, 23, 0.55);
+    color: #F8FAFC;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #64748B;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: rgba(103, 232, 249, 0.75);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-submit {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    border: 0;
+    border-radius: 12px;
+    padding: 0.95rem 1.1rem;
+    background: linear-gradient(120deg, #06b6d4, #2563eb);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0, 229, 255, 0.18);
+}
+
+.contact-form-note {
+    min-height: 1.25rem;
+    margin: 0.75rem 0 0;
+    color: #94A3B8;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+    .contact-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-orbit-art {
+        width: 180px;
+        height: 150px;
+        margin-top: 1rem;
+    }
+}

@@ -1,0 +1,139 @@
+.footer-container {
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem 1.5rem 1rem;
+    color: #F8FAFC;
+    text-align: center;
+}
+
+.footer-container::before {
+    position: absolute;
+    top: 4rem;
+    left: 50%;
+    width: min(680px, 90vw);
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(0, 229, 255, 0.12), transparent 68%);
+    content: "";
+    pointer-events: none;
+    transform: translateX(-50%);
+}
+
+.footer-container .section-divider {
+    margin: 0 auto 2.5rem;
+}
+
+.footer-eyebrow,
+.footer-message,
+.footer-copyright,
+.join,
+.connectlink-container {
+    position: relative;
+}
+
+.footer-eyebrow {
+    margin: 0 0 0.75rem;
+    color: #67e8f9;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.join {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.join span {
+    color: #F8FAFC;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
+    font-size: clamp(2.2rem, 6vw, 4.25rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+}
+
+.footer-message {
+    margin: 1rem 0 0;
+    color: #AAB7CC;
+    font-size: 1rem;
+}
+
+.connectlink-container {
+    margin: 1.75rem 0 2rem;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.child {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: 50%;
+    background: rgba(15, 23, 42, 0.7);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.child:hover {
+    transform: translateY(-4px);
+    border-color: rgba(103, 232, 249, 0.8);
+    background: rgba(8, 47, 73, 0.8);
+    box-shadow: 0 8px 24px rgba(0, 229, 255, 0.16);
+}
+
+.footer-container .button {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.footer-container .button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-container .button:focus-visible {
+    outline: 2px solid #67e8f9;
+    outline-offset: 3px;
+}
+
+.footer-copyright {
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+    color: #8190a8;
+    font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+    .footer-container {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .footer-container .section-divider {
+        width: 90%;
+    }
+
+    .footer-message {
+        max-width: 25rem;
+        margin-right: auto;
+        margin-left: auto;
+        line-height: 1.6;
+    }
+}

@@ -1,0 +1,303 @@
+.about-page {
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) 0;
+    color: #F8FAFC;
+}
+
+.about-page-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+    align-items: center;
+    gap: clamp(2rem, 8vw, 7rem);
+}
+
+.about-page-eyebrow {
+    margin: 0 0 1rem;
+    color: #67e8f9;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.about-page-copy h1,
+.contact-copy h1 {
+    margin: 0;
+    color: #F8FAFC;
+    font-size: clamp(2.7rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 1.04;
+}
+
+.about-page-copy h1 span,
+.contact-copy h1 span {
+    display: block;
+    color: #67e8f9;
+}
+
+.about-page-lead {
+    max-width: 650px;
+    margin: 1.5rem 0 0;
+    color: #E2E8F0;
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+.about-page-description {
+    max-width: 630px;
+    margin: 1rem 0 0;
+    color: #AAB7CC;
+    line-height: 1.8;
+}
+
+.about-page-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.about-primary-link,
+.about-secondary-link {
+    text-decoration: none;
+}
+
+.about-primary-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 999px;
+    padding: 0.85rem 1.25rem;
+    background: linear-gradient(120deg, #06b6d4, #2563eb);
+    color: #fff;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-primary-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 229, 255, 0.2);
+}
+
+.about-secondary-link {
+    color: #CBD5E1;
+    font-weight: 600;
+}
+
+.about-secondary-link:hover {
+    color: #67e8f9;
+}
+
+/* ---------- PORTRAIT + HEXAGON ---------- */
+
+.about-page-portrait-wrap {
+    position: relative;
+    display: grid;
+    height: clamp(360px, 42vw, 500px);
+    min-width: 0;
+    overflow: visible;
+    place-items: end center;
+}
+
+/* Hexagon: same width as the photo so the two line up */
+.about-page-portrait-glow {
+    position: absolute;
+    z-index: 0;
+    top: 20%;
+    bottom: 1%;
+    left: 50%;
+    width: min(100%, 360px);
+    transform: translateX(-50%);
+    background: linear-gradient(160deg, #19EFFF 0%, #00E0F5 55%, #00CBE6 100%);
+    clip-path: polygon(50% 0,
+            91.34% 20.67%,
+            100% 33.67%,
+            100% 66.33%,
+            91.34% 79.33%,
+            58.66% 95.67%,
+            50% 100%,
+            41.34% 95.67%,
+            8.66% 79.33%,
+            0 66.33%,
+            0 33.67%,
+            8.66% 20.67%);
+}
+
+/* Soft cyan glow behind the hexagon (a clip-path would cut a normal shadow) */
+.about-page-portrait-wrap::before {
+    position: absolute;
+    z-index: 0;
+    top: 24%;
+    bottom: 3%;
+    left: 50%;
+    width: min(88%, 320px);
+    border-radius: 50%;
+    background: rgba(0, 229, 255, 0.45);
+    content: "";
+    filter: blur(38px);
+    opacity: 0.55;
+    transform: translateX(-50%);
+    transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.about-page-portrait-wrap:hover::before {
+    opacity: 1;
+    filter: blur(52px);
+}
+
+/* Photo: bottom and sides are cut by the hexagon, the head pops out on top */
+.about-page-portrait {
+    position: relative;
+    z-index: 1;
+    align-self: end;
+    width: min(100%, 360px);
+    height: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    object-position: center bottom;
+    clip-path: polygon(0 0,
+            100% 0,
+            100% 46.6%,
+            100% 72.4%,
+            91.34% 82.7%,
+            58.66% 95.6%,
+            50% 99%,
+            41.34% 95.6%,
+            8.66% 82.7%,
+            0 72.4%,
+            0 46.6%);
+}
+
+.about-page-status {
+    position: absolute;
+    z-index: 2;
+    right: -0.25rem;
+    bottom: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 999px;
+    padding: 0.7rem 0.9rem;
+    background: rgba(15, 23, 42, 0.9);
+    color: #E2E8F0;
+    font-size: 0.8rem;
+    backdrop-filter: blur(12px);
+}
+
+.about-page-status span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 12px rgba(52, 211, 153, 0.8);
+}
+
+/* ---------- SKILLS ---------- */
+
+.about-page-skills {
+    display: block;
+    margin-top: clamp(4rem, 10vw, 7rem);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 24px;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    background: rgba(15, 23, 42, 0.52);
+    backdrop-filter: blur(10px);
+}
+
+.about-page-skills-heading {
+    margin-bottom: 1.75rem;
+}
+
+.about-page-skills h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+}
+
+.about-page-skills-heading>p:last-child {
+    margin: 0.65rem 0 0;
+    color: #AAB7CC;
+    line-height: 1.6;
+}
+
+.about-page-skill-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.about-page-skill-group {
+    min-width: 0;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 16px;
+    padding: 1.1rem;
+    background: rgba(2, 6, 23, 0.36);
+}
+
+.about-page-skill-group h3 {
+    margin: 0 0 0.85rem;
+    color: #E2E8F0;
+    font-size: 0.95rem;
+}
+
+.about-page-skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.about-page-skill-list span {
+    border: 1px solid rgba(103, 232, 249, 0.22);
+    border-radius: 999px;
+    padding: 0.65rem 0.9rem;
+    background: rgba(8, 47, 73, 0.42);
+    color: #CFFAFE;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-page-skill-list span:hover {
+    transform: translateY(-3px);
+    border-color: rgba(103, 232, 249, 0.75);
+    background: rgba(8, 47, 73, 0.78);
+    box-shadow: 0 7px 20px rgba(0, 229, 255, 0.13);
+}
+
+.about-page-skill-list span:focus-visible {
+    outline: 2px solid #67e8f9;
+    outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+    .about-page-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .about-page-portrait-wrap {
+        height: 360px;
+        grid-row: 1;
+    }
+
+    .about-page-portrait {
+        max-height: 360px;
+    }
+
+    .about-page-status {
+        right: 50%;
+        bottom: 0.5rem;
+        transform: translateX(50%);
+        white-space: nowrap;
+    }
+
+    .about-page-skill-list {
+        justify-content: flex-start;
+    }
+
+    .about-page-skill-groups {
+        grid-template-columns: 1fr;
+    }
+}
