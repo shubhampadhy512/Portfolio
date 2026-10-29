@@ -1195,6 +1195,11 @@ h1 {
         font-size: clamp(2rem, 8vw, 3rem);
     }
 
+    .typeanimation-conainter {
+        font-size: clamp(1rem, 5.5vw, 1.5rem);
+        overflow-wrap: anywhere;
+    }
+
     .caption {
         width: 100%;
         font-size: 1.2rem;
@@ -1249,6 +1254,7 @@ h1 {
 
     .featured-project-card {
         grid-template-columns: 1fr;
+        min-height: 0;
         gap: 0.5rem;
         padding: 1.25rem 0;
     }
@@ -1269,6 +1275,51 @@ h1 {
     .featured-project-type {
         right: 3%;
         font-size: 0.45rem;
+    }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+    .home-content-container {
+        grid-template-columns: minmax(0, 1.1fr) minmax(180px, 0.9fr);
+        gap: 1.5rem;
+    }
+
+    .st-name {
+        font-size: clamp(2rem, 4.5vw, 2.8rem);
+    }
+
+    .caption {
+        width: 90%;
+        font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+    }
+
+    .intro-btn {
+        gap: 1rem;
+    }
+
+    .project-btn button {
+        font-size: 1rem;
+    }
+
+    .let-connect-btn button {
+        font-size: 0.95rem;
+    }
+
+    .featured-projects {
+        width: min(100% - 48px, 900px);
+    }
+
+    .featured-project-card {
+        gap: 2rem;
+        min-height: 420px;
+    }
+
+    .featured-project-art {
+        min-height: 340px;
+    }
+
+    .featured-project-copy h3 {
+        font-size: clamp(2.2rem, 4vw, 3rem);
     }
 }
 

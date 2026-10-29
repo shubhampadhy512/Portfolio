@@ -1,6 +1,7 @@
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
 
+const NameLogo = `${process.env.PUBLIC_URL}/namelogo.png`;
 
 function NavBar() {
 
@@ -8,7 +9,8 @@ function NavBar() {
     <div className="body">
       <nav className="navbar">
         <div className="logo-container">
-          <div className="logo">Lloyd Shanty</div>
+          <img className="logo-image" src={NameLogo} alt="" />
+          <div className="logo">Shubham Padhy</div>
         </div>
         <div className="link-container">
           <ul className="nav-links">

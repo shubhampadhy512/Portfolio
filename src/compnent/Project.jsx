@@ -3,6 +3,8 @@ import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import "./Poject.css";
 
+const DeveloperLogo = `${process.env.PUBLIC_URL}/developerLogo.png`;
+
 const projects = [
     {
         number: "01",
@@ -106,11 +108,20 @@ function Project() {
     return (
         <main className="projects-page">
             <header className="projects-heading">
-                <p className="projects-eyebrow">SELECTED WORK</p>
-                <h1>Projects built with <span>curiosity.</span></h1>
-                <p className="projects-intro">
-                    A selection of things I’ve built and technologies I enjoy working with.
-                </p>
+                <div className="projects-heading-copy">
+                    <p className="projects-eyebrow">SELECTED WORK</p>
+                    <h1>Projects built with <span>curiosity.</span></h1>
+                    <p className="projects-intro">
+                        A selection of things I’ve built and technologies I enjoy working with.
+                    </p>
+                </div>
+                <div className="projects-heading-logo-wrap">
+                    <img
+                        className="projects-heading-logo"
+                        src={DeveloperLogo}
+                        alt="Shubham Padhy developer logo"
+                    />
+                </div>
             </header>
 
             <section className="projects-grid" aria-label="Project portfolio">

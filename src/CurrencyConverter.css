@@ -1,8 +1,9 @@
 /* Container styling */
 .converter-card {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
+    width: min(400px, calc(100% - 32px));
+    box-sizing: border-box;
+    margin: clamp(24px, 8vh, 50px) auto;
+    padding: clamp(20px, 6vw, 30px);
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -35,6 +36,8 @@
 .amount-input,
 .currency-select {
     width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -88,5 +91,15 @@
 @media (max-width: 480px) {
     .select-group {
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .converter-title {
+        font-size: 1.35rem;
+    }
+
+    .result-value {
+        font-size: 1.5rem;
+        overflow-wrap: anywhere;
     }
 }

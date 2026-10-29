@@ -56,11 +56,13 @@
 
 .contact-email {
     display: inline-flex;
+    max-width: 100%;
     align-items: center;
     gap: 0.65rem;
     color: #CFFAFE;
     font-weight: 600;
     text-decoration: none;
+    overflow-wrap: anywhere;
 }
 
 .contact-email:hover {
@@ -83,6 +85,7 @@
     border: 1px solid rgba(103, 232, 249, 0.35);
     border-radius: 50%;
     box-shadow: 0 0 35px rgba(0, 229, 255, 0.1);
+    transition: transform 0.5s ease, border-color 0.4s ease;
 }
 
 .contact-orbit-a {
@@ -197,13 +200,38 @@
 }
 
 @media (max-width: 760px) {
+    .contact-page {
+        width: min(100% - 32px, 600px);
+        padding-top: 2.5rem;
+    }
+
     .contact-panel {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        border-radius: 22px;
     }
 
     .contact-orbit-art {
         width: 180px;
         height: 150px;
         margin-top: 1rem;
+    }
+
+    .contact-orbit {
+        width: 126px;
+        height: 126px;
+    }
+
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+    .contact-page {
+        width: min(100% - 48px, 900px);
+    }
+
+    .contact-panel {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+        gap: 2rem;
+        padding: clamp(1.5rem, 4vw, 2.5rem);
     }
 }

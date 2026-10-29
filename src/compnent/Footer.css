@@ -136,4 +136,13 @@
         margin-left: auto;
         line-height: 1.6;
     }
+
+    .join span {
+        font-size: clamp(2rem, 9vw, 3rem);
+        text-align: center;
+    }
+
+    .parent {
+        gap: 0.65rem;
+    }
 }

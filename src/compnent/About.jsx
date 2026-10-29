@@ -7,6 +7,7 @@ const AboutPic = `${process.env.PUBLIC_URL}/Shubuu-about.png`;
 // Used automatically if the new photo is missing
 const FallbackPic = `${process.env.PUBLIC_URL}/Shubuu.png`;
 
+
 const skillGroups = [
   {
     category: "Frontend",

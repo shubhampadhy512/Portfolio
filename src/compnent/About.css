@@ -273,8 +273,14 @@
 }
 
 @media (max-width: 760px) {
+    .about-page {
+        width: min(100% - 32px, 600px);
+        padding-top: 2.5rem;
+    }
+
     .about-page-hero {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .about-page-portrait-wrap {
@@ -299,5 +305,28 @@
 
     .about-page-skill-groups {
         grid-template-columns: 1fr;
+    }
+
+    .about-page-skills {
+        margin-top: 3rem;
+    }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+    .about-page {
+        width: min(100% - 48px, 900px);
+    }
+
+    .about-page-hero {
+        grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+        gap: 2rem;
+    }
+
+    .about-page-portrait-wrap {
+        height: clamp(340px, 42vw, 430px);
+    }
+
+    .about-page-portrait {
+        max-height: 430px;
     }
 }
