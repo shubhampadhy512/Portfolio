@@ -751,6 +751,71 @@ h1 {
     isolation: isolate;
 }
 
+@media (hover: hover) and (pointer: fine) {
+    .featured-project-art {
+        cursor: none;
+    }
+}
+
+.home-project-cursor {
+    position: fixed;
+    z-index: 9999;
+    top: var(--cursor-y, -200px);
+    left: var(--cursor-x, -200px);
+    display: grid;
+    width: 92px;
+    height: 92px;
+    margin: -46px 0 0 -46px;
+    place-items: center;
+    border: 1px solid rgba(103, 232, 249, 0.55);
+    border-radius: 50%;
+    background: rgba(8, 15, 32, 0.82);
+    box-shadow: 0 0 28px rgba(0, 229, 255, 0.3);
+    color: #E0F2FE;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.6);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    backdrop-filter: blur(8px);
+}
+
+.home-project-cursor.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.home-project-cursor svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    animation: home-project-spinner-rotate 12s linear infinite;
+}
+
+.home-project-cursor text {
+    fill: #CFFAFE;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.home-project-cursor-arrow {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+@keyframes home-project-spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (hover: none), (pointer: coarse) {
+    .home-project-cursor {
+        display: none;
+    }
+}
+
 .featured-project-art::before {
     position: absolute;
     z-index: -1;
@@ -1214,7 +1279,9 @@ h1 {
     .about-code-token,
     .about-code-spark,
     .about-code-line,
-    .about-star-large {
+    .about-star-large,
+    .home-project-cursor,
+    .home-project-cursor svg {
         animation: none;
     }
 }

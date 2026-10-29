@@ -1,11 +1,13 @@
 import "./Home.css"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 
 const RobotPic = `${process.env.PUBLIC_URL}/image-removebg-preview.png`;
 const ProfilePic = `${process.env.PUBLIC_URL}/Shubuu.png`;
 const ConnectLink = `${process.env.PUBLIC_URL}/image.png`;
+// const ProfilePic = `${process.env.PUBLIC_URL}/lloydimage.png`;
 
 const featuredProjects = [
     {
@@ -52,7 +54,43 @@ const technologies = [
 
 function Home() {
     const [Robot, setRobot] = useState(false);
+    const cursorRef = useRef(null);
+    const pointerRef = useRef({ x: -1, y: -1 });
+    const [cursorVisible, setCursorVisible] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const syncCursor = () => {
+            const { x, y } = pointerRef.current;
+            const target = document.elementFromPoint(x, y);
+            if (!target || !target.closest(".featured-project-art")) {
+                setCursorVisible(false);
+            }
+        };
+        const hideCursor = () => setCursorVisible(false);
+        const root = document.documentElement;
+
+        window.addEventListener("scroll", syncCursor, { passive: true, capture: true });
+        window.addEventListener("blur", hideCursor);
+        root.addEventListener("mouseleave", hideCursor);
+
+        return () => {
+            window.removeEventListener("scroll", syncCursor, { capture: true });
+            window.removeEventListener("blur", hideCursor);
+            root.removeEventListener("mouseleave", hideCursor);
+        };
+    }, []);
+
+    const moveProjectCursor = (event) => {
+        if (event.pointerType === "touch") return;
+        const cursor = cursorRef.current;
+        if (!cursor) return;
+        cursor.style.setProperty("--cursor-x", `${event.clientX}px`);
+        cursor.style.setProperty("--cursor-y", `${event.clientY}px`);
+        pointerRef.current = { x: event.clientX, y: event.clientY };
+        setCursorVisible(true);
+    };
+
     return (
         <>
             <div className={`robot-page-wrapper ${Robot ? "body-content" : ""}`}>
@@ -225,7 +263,12 @@ function Home() {
                 <div className="featured-projects-grid">
                     {featuredProjects.map((project) => (
                         <article className="featured-project-card" key={project.number}>
-                            <div className={`featured-project-art featured-project-art-${project.number}`}>
+                            <div
+                                className={`featured-project-art featured-project-art-${project.number}`}
+                                onPointerEnter={moveProjectCursor}
+                                onPointerMove={moveProjectCursor}
+                                onPointerLeave={() => setCursorVisible(false)}
+                            >
                                 <span className="featured-project-number">{project.number}</span>
                                 <span className="featured-project-type">{project.type}</span>
                                 <div className="featured-project-window featured-project-window-main" aria-hidden="true">
@@ -299,6 +342,29 @@ function Home() {
                     <span aria-hidden="true">→</span>
                 </button>
             </section>
+            {createPortal(
+                <div
+                    ref={cursorRef}
+                    className={`home-project-cursor ${cursorVisible ? "is-visible" : ""}`}
+                    aria-hidden="true"
+                >
+                    <svg viewBox="0 0 100 100">
+                        <defs>
+                            <path
+                                id="home-project-cursor-path"
+                                d="M50 50m-35 0a35 35 0 1 1 70 0a35 35 0 1 1-70 0"
+                            />
+                        </defs>
+                        <text>
+                            <textPath href="#home-project-cursor-path" textLength="216" lengthAdjust="spacing">
+                                VIEW PROJECT • VIEW PROJECT •
+                            </textPath>
+                        </text>
+                    </svg>
+                    <span className="home-project-cursor-arrow">↗</span>
+                </div>,
+                document.body
+            )}
         </>
     )
 }

@@ -8,8 +8,10 @@ const projects = [
         number: "01",
         title: "Portfolio Website",
         category: "WEB DEVELOPMENT",
+        subtitle: "A personal space for projects, skills, and connection.",
         description:
             "A responsive personal portfolio built to introduce my work, share my skills, and make it easy to get in touch.",
+        features: ["Responsive portfolio layout", "Project and skills showcase", "Direct contact links"],
         technologies: ["React", "CSS", "React Router"],
         url: "https://github.com/shubhampadhy512",
         visual: "portfolio",
@@ -24,8 +26,10 @@ const projects = [
         number: "02",
         title: "Currency Converter",
         category: "REACT APPLICATION",
+        subtitle: "Simple currency comparisons with current exchange rates.",
         description:
             "A currency conversion interface that fetches exchange rates and lets users compare currencies with a simple workflow.",
+        features: ["Choose source and target currencies", "Convert entered amounts", "Display the converted result"],
         technologies: ["React", "JavaScript", "REST API"],
         url: "https://github.com/shubhampadhy512",
         visual: "currency",
@@ -40,8 +44,10 @@ const projects = [
         number: "03",
         title: "Unity Game Development",
         category: "GAME DEVELOPMENT",
+        subtitle: "Interactive gameplay experiments built with Unity.",
         description:
             "Exploring interactive gameplay and real-time experiences with C# and Unity.",
+        features: ["Interactive gameplay concepts", "C# scripting experiments", "Real-time Unity development"],
         technologies: ["C#", "Unity", "Game development"],
         url: "https://github.com/shubhampadhy512",
         visual: "game",
@@ -118,14 +124,84 @@ function Project() {
                     >
                         <div className={`project-visual project-visual-${project.visual}`}>
                             <span className="project-index">{project.number}</span>
-                            <div className="project-visual-orbit" aria-hidden="true" />
-                            <div className="project-icon">{project.icon}</div>
                             <span className="project-category">{project.category}</span>
+                            <div className="project-window project-window-main" aria-hidden="true">
+                                <div className="project-window-bar">
+                                    <span />
+                                    <span />
+                                    <span />
+                                    <i>{project.visual === "portfolio" ? "shubham.dev" : project.title}</i>
+                                </div>
+                                <div className="project-window-content">
+                                    <span className="project-window-kicker">{project.category}</span>
+                                    <div className="project-window-mark">{project.icon}</div>
+                                    <strong>{project.title}</strong>
+                                    {project.visual === "portfolio" && (
+                                        <div className="project-scene project-scene-portfolio">
+                                            <span className="project-scene-nav" />
+                                            <span className="project-scene-hero" />
+                                            <span className="project-scene-copy" />
+                                            <div><i /><i /><i /></div>
+                                        </div>
+                                    )}
+                                    {project.visual === "currency" && (
+                                        <div className="project-scene project-scene-currency">
+                                            <span><b>$</b><i>USD</i><em>1.00</em></span>
+                                            <strong aria-hidden="true">↓</strong>
+                                            <span><b>€</b><i>EUR</i><em>0.92</em></span>
+                                        </div>
+                                    )}
+                                    {project.visual === "game" && (
+                                        <div className="project-scene project-scene-game">
+                                            <span className="project-scene-stars" />
+                                            <span className="project-scene-moon" />
+                                            <span className="project-scene-hill project-scene-hill-back" />
+                                            <span className="project-scene-hill project-scene-hill-front" />
+                                            <i className="project-scene-player" />
+                                            <span className="project-scene-hud">LVL 01 <b>♥ ♥ ♥</b></span>
+                                        </div>
+                                    )}
+                                    <span className="project-window-rule" />
+                                    <span className="project-window-line" />
+                                    <span className="project-window-line short" />
+                                    <div className="project-window-tiles">
+                                        <span />
+                                        <span />
+                                        <span />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="project-window project-window-overlay" aria-hidden="true">
+                                <div className="project-window-bar">
+                                    <span />
+                                    <span />
+                                    <span />
+                                    <i>project preview</i>
+                                </div>
+                                <div className="project-window-overlay-content">
+                                    <span />
+                                    <span />
+                                    <span />
+                                    <b />
+                                </div>
+                            </div>
                             <span className="project-touch-badge" aria-hidden="true">↗</span>
                         </div>
                         <div className="project-card-content">
+                            <div className="project-card-meta">
+                                <span>{"// "}{project.number}</span>
+                                <i aria-hidden="true" />
+                                <span>{project.category}</span>
+                            </div>
                             <h2>{project.title}</h2>
-                            <p>{project.description}</p>
+                            <p className="project-card-subtitle">{project.subtitle}</p>
+                            <span className="project-card-divider" aria-hidden="true" />
+                            <p className="project-card-description">{project.description}</p>
+                            <ul className="project-feature-list" aria-label={`${project.title} highlights`}>
+                                {project.features.map((feature) => (
+                                    <li key={feature}>{feature}</li>
+                                ))}
+                            </ul>
                             <ul className="project-tech-list" aria-label={`${project.title} technologies`}>
                                 {project.technologies.map((technology) => (
                                     <li key={technology}>{technology}</li>
