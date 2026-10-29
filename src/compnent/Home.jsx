@@ -11,20 +11,29 @@ const featuredProjects = [
     {
         number: "01",
         title: "Portfolio Website",
-        description: "A responsive portfolio highlighting my work, skills, and experience.",
+        subtitle: "A personal space for projects, skills, and connection.",
+        description: "A responsive React portfolio introducing my work and development journey, with dedicated sections for projects, background, and ways to get in touch.",
         type: "WEB DESIGN",
+        features: ["Responsive portfolio layout", "Project and skills showcase", "Direct contact links"],
+        technologies: ["React", "CSS", "React Router"],
     },
     {
         number: "02",
         title: "Currency Converter",
-        description: "A currency conversion tool with live exchange-rate data.",
+        subtitle: "Simple currency comparisons with current exchange rates.",
+        description: "A React application that converts an entered amount between selected currencies using exchange-rate data from the Frankfurter API.",
         type: "REACT APP",
+        features: ["Choose source and target currencies", "Convert entered amounts", "Display the converted result"],
+        technologies: ["React", "JavaScript", "Frankfurter API"],
     },
     {
         number: "03",
-        title: "Project Showcase",
-        description: "An interactive gallery for exploring web projects and experiments.",
-        type: "UI DEVELOPMENT",
+        title: "Unity Game Development",
+        subtitle: "Interactive gameplay experiments built with Unity.",
+        description: "An exploration of real-time game experiences, combining C# scripting with Unity's tools for building interactive gameplay.",
+        type: "GAME DEVELOPMENT",
+        features: ["Interactive gameplay concepts", "C# scripting experiments", "Real-time Unity development"],
+        technologies: ["C#", "Unity", "Game development"],
     },
 ];
 
@@ -148,15 +157,15 @@ function Home() {
                             role="img"
                             aria-labelledby="about-illustration-title"
                         >
-                            <title id="about-illustration-title">A developer working among the stars</title>
+                            <title id="about-illustration-title">Floating code panels orbiting among the stars</title>
                             <defs>
                                 <radialGradient id="about-glow">
                                     <stop offset="0%" stopColor="#00e5ff" stopOpacity=".35" />
                                     <stop offset="100%" stopColor="#00e5ff" stopOpacity="0" />
                                 </radialGradient>
-                                <linearGradient id="about-laptop" x1="0" x2="1" y1="0" y2="1">
-                                    <stop offset="0%" stopColor="#192a4d" />
-                                    <stop offset="100%" stopColor="#0b1225" />
+                                <linearGradient id="about-code-panel" x1="0" x2="1" y1="0" y2="1">
+                                    <stop offset="0%" stopColor="#152544" />
+                                    <stop offset="100%" stopColor="#0a1123" />
                                 </linearGradient>
                             </defs>
                             <circle cx="200" cy="200" r="180" fill="url(#about-glow)" />
@@ -166,25 +175,36 @@ function Home() {
                             <circle className="about-star" cx="306" cy="95" r="2" />
                             <circle className="about-star" cx="318" cy="279" r="3" />
                             <circle className="about-star" cx="91" cy="286" r="2" />
-                            <path d="M200 86l5 13 13 5-13 5-5 13-5-13-13-5 13-5z" fill="#a5f3fc" />
-                            <rect x="106" y="146" width="188" height="128" rx="14" fill="url(#about-laptop)" stroke="#38bdf8" strokeOpacity=".7" />
-                            <rect x="119" y="159" width="162" height="99" rx="7" fill="#080d1a" />
-                            <path d="M179 192l-18 15 18 15M221 192l18 15-18 15M210 186l-18 43" fill="none" stroke="#67e8f9" strokeLinecap="round" strokeLinejoin="round" strokeWidth="5" />
-                            <path d="M91 278h218l24 17H67z" fill="#263752" stroke="#38bdf8" strokeOpacity=".55" />
-                            <circle cx="200" cy="284" r="3" fill="#67e8f9" />
-                            <circle cx="305" cy="170" r="17" fill="#12203b" stroke="#a78bfa" strokeWidth="2" />
-                            <path d="M305 160v20M295 170h20" stroke="#c4b5fd" strokeLinecap="round" strokeWidth="2" />
+                            <g className="about-code-float">
+                                <rect x="105" y="119" width="190" height="164" rx="15" fill="url(#about-code-panel)" stroke="#38bdf8" strokeOpacity=".65" />
+                                <path d="M105 151h190" stroke="#38bdf8" strokeOpacity=".22" />
+                                <circle cx="124" cy="135" r="3" fill="#fb7185" />
+                                <circle cx="136" cy="135" r="3" fill="#fbbf24" />
+                                <circle cx="148" cy="135" r="3" fill="#34d399" />
+                                <rect x="122" y="168" width="156" height="96" rx="8" fill="#080d1a" fillOpacity=".9" />
+                                <path d="M148 191l-12 11 12 11M178 191l12 11-12 11" fill="none" stroke="#67e8f9" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
+                                <path className="about-code-line" d="M202 191h43M202 202h30M146 232h24M181 232h61M146 244h42" fill="none" stroke="#a78bfa" strokeLinecap="round" strokeWidth="3" />
+                                <circle cx="259" cy="228" r="5" fill="#67e8f9" />
+                            </g>
+                            <g className="about-code-token">
+                                <rect x="69" y="157" width="48" height="40" rx="12" fill="#111d38" stroke="#a78bfa" strokeOpacity=".75" />
+                                <path d="M84 177l6-6 6 6-6 6zm17-6-6 6 6 6" fill="none" stroke="#c4b5fd" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" />
+                            </g>
+                            <g className="about-code-spark">
+                                <circle cx="307" cy="252" r="20" fill="#102343" stroke="#38bdf8" strokeOpacity=".7" />
+                                <path d="M307 241v22m-11-11h22" stroke="#67e8f9" strokeLinecap="round" strokeWidth="2.5" />
+                            </g>
+                            <path className="about-star about-star-large" d="M200 83l5 13 13 5-13 5-5 13-5-13-13-5 13-5z" />
                         </svg>
                     </div>
                     <div className="my-intro-text">
                         <p className="about-kicker">A LITTLE ABOUT ME</p>
                         <h2>Curious by nature.<br /><span>Developer by choice.</span></h2>
                         <p>
-                            I’m <strong>Shubham Padhy</strong>, a motivated software developer with a strong interest in building thoughtful web experiences.
-                            I enjoy turning ideas into responsive, easy-to-use applications with React and Java.
+                            I’m <strong>Shubham Padhy</strong>, a software developer passionate about full-stack development and problem-solving. I enjoy building responsive, user-friendly web applications using React and modern JavaScript technologies, along with developing backend services and working with databases to turn ideas into practical software solutions.
                         </p>
                         <p>
-                            I care about clean code, useful details, and learning something new with every project.
+                            I focus on writing clean, maintainable code and continuously improving my technical skills through hands-on projects. Beyond web development, I'm also interested in game development, where I enjoy exploring interactive experiences, creative ideas, and the technologies behind game creation.
                         </p>
                         <div className="about-skill-list" aria-label="Technology interests">
                             {technologies.map((technology) => (
@@ -207,12 +227,65 @@ function Home() {
                         <article className="featured-project-card" key={project.number}>
                             <div className={`featured-project-art featured-project-art-${project.number}`}>
                                 <span className="featured-project-number">{project.number}</span>
-                                <span className="featured-project-orbit" aria-hidden="true" />
                                 <span className="featured-project-type">{project.type}</span>
+                                <div className="featured-project-window featured-project-window-main" aria-hidden="true">
+                                    <div className="featured-project-window-bar">
+                                        <span />
+                                        <span />
+                                        <span />
+                                        <i>shubham.dev</i>
+                                    </div>
+                                    <div className="featured-project-window-content">
+                                        <span className="featured-project-window-kicker">{project.type}</span>
+                                        <strong>{project.title}</strong>
+                                        <span className="featured-project-window-rule" />
+                                        <span className="featured-project-window-line" />
+                                        <span className="featured-project-window-line short" />
+                                        <div className="featured-project-window-tiles">
+                                            <span />
+                                            <span />
+                                            <span />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="featured-project-window featured-project-window-overlay" aria-hidden="true">
+                                    <div className="featured-project-window-bar">
+                                        <span />
+                                        <span />
+                                        <span />
+                                        <i>project preview</i>
+                                    </div>
+                                    <div className="featured-project-overlay-content">
+                                        <span />
+                                        <span />
+                                        <span />
+                                        <b />
+                                    </div>
+                                </div>
                             </div>
                             <div className="featured-project-copy">
+                                <div className="featured-project-meta">
+                                    <span>{"// "}{project.number}</span>
+                                    <i aria-hidden="true" />
+                                    <span>{project.type}</span>
+                                </div>
                                 <h3>{project.title}</h3>
-                                <p>{project.description}</p>
+                                <p className="featured-project-lead">{project.subtitle}</p>
+                                <span className="featured-project-divider" aria-hidden="true" />
+                                <p className="featured-project-description">{project.description}</p>
+                                <ul className="featured-project-features">
+                                    {project.features.map((feature) => (
+                                        <li key={feature}>{feature}</li>
+                                    ))}
+                                </ul>
+                                <p className="featured-project-technologies">
+                                    {project.technologies.map((technology, index) => (
+                                        <span key={technology}>
+                                            {index > 0 && <i aria-hidden="true">·</i>}
+                                            {technology}
+                                        </span>
+                                    ))}
+                                </p>
                             </div>
                         </article>
                     ))}
