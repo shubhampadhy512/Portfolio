@@ -176,7 +176,12 @@ function Home() {
                                 </div>
                                 <div className="user-photo">
                                     <img src={ProfilePic} alt="Shubham Padhy" />
+
                                 </div>
+                                <span className="about-page-status">
+                                    <span aria-hidden="true" />
+                                    Open to opportunities
+                                </span>
                             </div>
                         </div>
                     </div>

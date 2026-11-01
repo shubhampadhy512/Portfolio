@@ -1,12 +1,10 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./About.css";
 
-// Put your second photo in the /public folder with this name
-// (or change the file name here).
-const AboutPic = `${process.env.PUBLIC_URL}/Shubuu-about.png`;
-// Used automatically if the new photo is missing
-const FallbackPic = `${process.env.PUBLIC_URL}/Shubuu.png`;
-
+const AboutVideo = `${process.env.PUBLIC_URL}/large%20(1).mp4`;
+const GITHUB_USERNAME = "shubhampadhy512";
+const CONTRIBUTIONS_API = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`;
 
 const skillGroups = [
   {
@@ -26,6 +24,174 @@ const skillGroups = [
     technologies: ["C#", "Unity", "Game development"],
   },
 ];
+
+function getCalendarDays(contributions) {
+  const firstDay = new Date(`${contributions[0].date}T00:00:00Z`).getUTCDay();
+  const days = [...Array(firstDay).fill(null), ...contributions];
+  const trailingDays = (7 - (days.length % 7)) % 7;
+
+  return [...days, ...Array(trailingDays).fill(null)];
+}
+
+function GitHubContributions() {
+  const [contributionData, setContributionData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadContributions() {
+      setIsLoading(true);
+      setHasError(false);
+
+      try {
+        const response = await fetch(CONTRIBUTIONS_API, {
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Contribution API returned ${response.status}`);
+        }
+
+        const data = await response.json();
+        const hasValidData =
+          typeof data.total?.lastYear === "number" &&
+          Array.isArray(data.contributions) &&
+          data.contributions.length > 0 &&
+          data.contributions.every(
+            (contribution) =>
+              /^\d{4}-\d{2}-\d{2}$/.test(contribution.date) &&
+              Number.isFinite(contribution.count) &&
+              Number.isFinite(contribution.level)
+          );
+
+        if (!hasValidData) {
+          throw new Error("Contribution API returned unexpected data");
+        }
+
+        setContributionData(data);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setHasError(true);
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadContributions();
+    return () => controller.abort();
+  }, [retryCount]);
+
+  const calendarDays = contributionData
+    ? getCalendarDays(contributionData.contributions)
+    : [];
+
+  return (
+    <section
+      className="about-page-contributions"
+      aria-labelledby="about-contributions-title"
+    >
+      <div className="about-page-contributions-heading">
+        <div>
+          <p className="about-page-eyebrow">ON GITHUB</p>
+          <h2 id="about-contributions-title">Contribution activity</h2>
+        </div>
+        {contributionData && (
+          <p className="about-page-contribution-total">
+            <strong>{contributionData.total.lastYear.toLocaleString()}</strong>{" "}
+            contributions in the last year
+          </p>
+        )}
+      </div>
+
+      {isLoading && (
+        <p className="about-page-contribution-message" role="status">
+          Loading GitHub contributions…
+        </p>
+      )}
+
+      {hasError && (
+        <div className="about-page-contribution-message" role="alert">
+          <p>GitHub contributions couldn’t be loaded right now.</p>
+          <button
+            className="about-page-contribution-retry"
+            type="button"
+            onClick={() => setRetryCount((count) => count + 1)}
+          >
+            Try again
+          </button>
+        </div>
+      )}
+
+      {contributionData && (
+        <>
+          <div
+            className="about-page-contribution-scroll"
+            role="img"
+            aria-label={`Contribution calendar for the last year: ${contributionData.total.lastYear} contributions`}
+          >
+            <div className="about-page-contribution-grid">
+              {calendarDays.map((contribution, index) => {
+                if (!contribution) {
+                  return (
+                    <span
+                      className="about-page-contribution-day is-empty"
+                      key={`empty-${index}`}
+                      aria-hidden="true"
+                    />
+                  );
+                }
+
+                const date = new Date(`${contribution.date}T00:00:00Z`);
+                const formattedDate = date.toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                  timeZone: "UTC",
+                });
+
+                return (
+                  <span
+                    className="about-page-contribution-day"
+                    data-level={Math.min(4, Math.max(0, contribution.level))}
+                    key={contribution.date}
+                    title={`${contribution.count} contributions on ${formattedDate}`}
+                    aria-hidden="true"
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className="about-page-contribution-footer">
+            <span>Less</span>
+            <span className="about-page-contribution-legend" aria-hidden="true">
+              {[0, 1, 2, 3, 4].map((level) => (
+                <span
+                  className="about-page-contribution-day"
+                  data-level={level}
+                  key={level}
+                />
+              ))}
+            </span>
+            <span>More</span>
+            <a
+              href={`https://github.com/${GITHUB_USERNAME}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View GitHub profile <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
 
 function About() {
   return (
@@ -57,21 +223,17 @@ function About() {
           </div>
         </div>
         <div className="about-page-portrait-wrap">
-          <div className="about-page-portrait-glow" aria-hidden="true" />
-          <img
+          <video
             className="about-page-portrait"
-            src={AboutPic}
-            alt="Shubham Padhy"
-            onError={(event) => {
-              // Stop looping, then fall back to the original photo
-              event.currentTarget.onerror = null;
-              event.currentTarget.src = FallbackPic;
-            }}
-          />
-          <span className="about-page-status">
-            <span aria-hidden="true" />
-            Open to opportunities
-          </span>
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            aria-label="Shubham Padhy"
+          >
+            <source src={AboutVideo} type="video/mp4" />
+          </video>
         </div>
       </section>
 
@@ -94,6 +256,7 @@ function About() {
           ))}
         </div>
       </section>
+      <GitHubContributions />
     </main>
   );
 }
